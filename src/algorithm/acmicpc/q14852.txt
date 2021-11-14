@@ -1,0 +1,29 @@
+#include<iostream>
+
+using namespace std;
+
+int dp[1000001];
+int sum[1000001];
+const int mod = 1000000007;
+
+long long getValue(int n);
+
+int getSum(int n){
+    if(sum[n] != 0) return sum[n];
+    else return sum[n] = (getSum(n-1) + getValue(n)) % mod;
+}
+
+long long getValue(int n) {
+    if (dp[n] != 0) return dp[n];
+    else return dp[n] = (getValue(n - 1) * 2 + getValue(n - 2) * 3 + getSum(n - 3) * 2) % mod;
+}
+
+int main(void) {
+    int n;
+    cin >> n;
+    dp[0] = 1;
+    dp[1] = 2;
+    dp[2] = 7;
+    sum[0] = 1;
+    cout << getValue(n);
+}

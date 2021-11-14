@@ -1,0 +1,30 @@
+#include<iostream>
+#include<vector>
+#include <algorithm>
+
+using namespace std;
+
+int main(void){
+    int n, m, h;
+    cin >> n;
+    vector<pair<int, int>> v;
+    for (int i = 0; i < n; i++) {
+        cin >> m >> h;
+        v.push_back(make_pair(m,h));
+    }
+    sort(v.begin(),v.end());
+    int ans = 0;
+
+    int dp[100];
+    for (int i = 0; i < n; i++) {
+        dp[i] = 1;
+        for (int j = 0; j < i; j++) {
+            if(v[i].second > v[j].second){
+                dp[i] = max(dp[i] , dp[j] + 1);
+            }
+        }
+        ans = max(ans, dp[i]);
+    }
+
+    cout << n - ans;
+}

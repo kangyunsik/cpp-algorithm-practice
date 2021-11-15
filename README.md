@@ -25,6 +25,7 @@ https://programmers.co.kr/learn/courses/30/lessons/{QUESTION-NUMBER}
 + q4963(Silver 2)
     - 섬의 개수
     - (20211116)
+    - (20211116) - Refactor (_2)
 
 
 + q10021(Gold 3)

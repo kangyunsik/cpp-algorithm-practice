@@ -1,0 +1,35 @@
+#include<iostream>
+
+using namespace std;
+
+int arr[50][50], w, h;
+int dx[] = {1, 1, 0, -1, -1, -1, 0, 1};
+int dy[] = {0, -1, -1, -1, 0, 1, 1, 1};
+
+void dfs(int i, int j) {
+    if (!(i >= 0 && j >= 0 && i < w && j < h && arr[i][j] == 1)) return;
+    arr[i][j] = 0;
+    for (int k = 0; k < 8; k++) {
+        dfs(i + dx[k], j + dy[k]);
+    }
+}
+
+int main(void) {
+    cin >> h >> w;
+    while (w != 0 && h != 0) {
+        int ans = 0;
+        for (int i = 0; i < w; i++)
+            for (int j = 0; j < h; j++)
+                cin >> arr[i][j];
+
+        for (int i = 0; i < w; i++)
+            for (int j = 0; j < h; j++)
+                if (arr[i][j]) {
+                    dfs(i, j);
+                    ans++;
+                }
+
+        cout << ans << '\n';
+        cin >> h >> w;
+    }
+}

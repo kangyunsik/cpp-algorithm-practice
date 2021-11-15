@@ -1,0 +1,46 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+
+#define INF 10000000;
+using namespace std;
+using pi = pair<int, int>;
+
+priority_queue<pi> pq; // cost, dest
+int visit[2000], dist[2000], x[2000], y[2000];
+
+int getCost(int i, int j) {
+    return (x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]);
+}
+
+int main(void) {
+    int n, c, a, b;
+    cin >> n >> c;
+    for (int i = 0; i < n; i++) {
+        cin >> a >> b;
+        x[i] = a; y[i] = b;
+        dist[i] = INF;
+    }
+
+    pq.push(pi(0, 0));
+    dist[0] = 0;
+    long long sum = 0, con = 0;
+    while (!pq.empty()) {
+        int cost = -pq.top().first;
+        int dest = pq.top().second;
+        pq.pop();
+        if (cost > dist[dest]) continue;
+        visit[dest] = 1;
+        con++;
+        sum += cost;
+        for (int i = 0; i < n; i++) {
+            int nCost = getCost(i, dest);
+            if (i != dest && !visit[i] && nCost >= c && dist[i] > nCost) {
+                dist[i] = nCost;
+                pq.push(pi(-nCost, i));
+            }
+        }
+    }
+    if (con != n) sum = -1;
+    cout << sum << '\n';
+}

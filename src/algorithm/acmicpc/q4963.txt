@@ -1,0 +1,47 @@
+#include<iostream>
+#include<queue>
+
+using namespace std;
+using pii = pair<int, int>;
+
+int arr[50][50], visit[50][50], w, h;
+int dx[] = {1, 1, 0, -1, -1, -1, 0, 1};
+int dy[] = {0, -1, -1, -1, 0, 1, 1, 1};
+
+int main(void) {
+    cin >> h >> w;
+    while (w != 0 && h != 0) {
+        int ans = 0;
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                visit[i][j] = 0;
+                cin >> arr[i][j];
+            }
+        }
+
+        queue<pii> q;
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                if (!visit[i][j] && arr[i][j] == 1) {
+                    q.push(pii(i, j));
+                    visit[i][j] = 1;
+                    while (!q.empty()) {
+                        for (int k = 0; k < 8; k++) {
+                            int px = q.front().first + dx[k];
+                            int py = q.front().second + dy[k];
+                            if (px >= 0 && px < w && py >= 0 && py < h && !visit[px][py] && arr[px][py] == 1) {
+                                q.push(pii(px, py));
+                                visit[px][py] = 1;
+                            }
+                        }
+                        q.pop();
+                    }
+                    ans++;
+                }
+            }
+        }
+
+        cout << ans << '\n';
+        cin >> h >> w;
+    }
+}

@@ -1,0 +1,16 @@
+#include <vector>
+
+using namespace std;
+
+int solution(int n, vector<int> stations, int w) {
+    int answer = 0, pre = 1;
+    for (int i = 0; i < stations.size(); i++) {
+        int right = stations[i] - w - 1;
+        if (right >= pre) answer += (right - pre) / (2 * w + 1) + 1;
+        pre = stations[i] + w + 1;
+    }
+    if(n - pre >= 0)
+        answer += (n - pre) / (2 * w + 1) + 1;
+
+    return answer;
+}

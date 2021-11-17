@@ -60,6 +60,11 @@ https://programmers.co.kr/learn/courses/30/lessons/{QUESTION-NUMBER}
     - (20211116)
 
 
++ q12979
+    - 기지국 설치
+    - (20211117)
+
+
 + q12981
     - 영어 끝말잇기
     - (20211116)

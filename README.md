@@ -55,6 +55,11 @@ https://programmers.co.kr/learn/courses/30/lessons/{QUESTION-NUMBER}
 
 ## Programmers
 
++ q12971
+    - 스티커 모으기(2)
+    - (20211117)
+
+
 + q12978
     - 배달
     - (20211116)

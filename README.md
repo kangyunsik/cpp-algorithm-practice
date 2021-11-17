@@ -63,3 +63,8 @@ https://programmers.co.kr/learn/courses/30/lessons/{QUESTION-NUMBER}
 + q12981
     - 영어 끝말잇기
     - (20211116)
+
+
++ q49993
+    - 스킬트리
+    - (20211117)

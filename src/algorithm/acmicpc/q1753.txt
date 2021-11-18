@@ -1,0 +1,54 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<unordered_map>
+
+#define INF 1<<30
+using namespace std;
+using pii = pair<int,int>;
+unordered_map<int,int> edges[20001];    // dest, cost
+
+int main(void){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    int V,E,K,u,v,w;
+    cin >> V >> E >> K;
+    for (int i = 0; i < E; i++) {
+        cin >> u >> v >> w;
+        if(edges[u].find(v) != edges[u].end()){
+            int pre = edges[u].find(v)->second;
+            edges[u].erase(v);
+            edges[u].insert(pii(v,min(pre, w)));
+        }else{
+            edges[u].insert(pii(v,w));
+        }
+    }
+
+    int *dist = new int[V+1];
+    for (int i = 0; i <= V; i++) {
+        dist[i] = INF;
+    }
+    dist[K] = 0;
+    priority_queue<pii> pq; // cost, dest
+    pq.push(pii(0,K));
+    while(!pq.empty()){
+        int cost = -pq.top().first;
+        int dest = pq.top().second;
+        pq.pop();
+        if(cost > dist[dest]) continue;
+        for (pair<int,int> p: edges[dest]) {
+            int nDest = p.first;
+            int nCost = p.second;
+            if(dist[nDest] > nCost + cost){
+                dist[nDest] = nCost + cost;
+                pq.push(pii(-dist[nDest],nDest));
+            }
+        }
+    }
+    for (int i = 1; i <= V; i++) {
+        if(dist[i] == INF)
+            cout << "INF" << '\n';
+        else
+            cout << dist[i] << '\n';
+    }
+}
